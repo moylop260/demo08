@@ -141,8 +141,7 @@
                 <field name="color"/>
                 <templates>
                     <t t-name="kanban-box">
-                        <div
-                                t-attf-class="oe_kanban_color_{{kanban_getcolor(record.color.raw_value)}}
+                        <div t-attf-class="oe_kanban_color_{{kanban_getcolor(record.color.raw_value)}}
                                                 oe_kanban_global_click_edit oe_semantic_html_override
                                                 oe_kanban_card {{record.group_fancy==1 ? 'oe_kanban_card_fancy' : ''}}">
                             <div class="oe_dropdown_kanban">
@@ -154,8 +153,7 @@
                                             <a type="delete">Delete</a>
                                         </li>
                                         <li>
-                                            <ul class="oe_kanban_colorpicker"
-                                                data-field="color"/>
+                                            <ul class="oe_kanban_colorpicker" data-field="color"/>
                                         </li>
                                     </ul>
                                 </div>
@@ -205,14 +203,16 @@
         <field name="arch" type="xml">
             <form string="Add Attendees">
                 <group>
-                    <field name="session_id"/>
+                    <field name="session_ids"/>
                     <field name="attendee_ids"/>
                 </group>
+                <footer>
+                    <button name="subscribe" type="object" string="Subscribe" class="oe_highlight"/>
+                    or
+                    <button special="cancel" string="Cancel"/>
+                </footer>
             </form>
         </field>
     </record>
-    
-    <act_window id="launch_session_wizard" name="Add Attendees" 
-    src_model="openacademy.session" res_model="openacademy.wizard" view_mode="form" 
-    target="new" key2="client_action_multi" />
+    <act_window id="launch_session_wizard" name="Add Attendees" binding_model="openacademy.session" res_model="openacademy.wizard" view_mode="form" target="new"/>
 </odoo>
