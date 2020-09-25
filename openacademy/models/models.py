@@ -18,7 +18,7 @@ class Course(models.Model):
 	session_ids = fields.One2many('openacademy.session', 'course_id')
 
 	_sql_constraints = [
-		('name_description_check', 
+		('name_description_check',
 		'CHECK(name != description)',
 		"The title of the course should not be the description"
 		),
@@ -31,12 +31,12 @@ class Course(models.Model):
 	def copy(self, default=None):
 		if default is None:
 			default = {}
-			copied_count = self.search_count([('name', 'ilike', 'Copy of %s%%' % (self.name))])
+			copied_count = self.search_count([('name', 'ilike', 'Duplicate of %s%%' % (self.name))])
 
 			if not copied_count:
-				new_name = _("Copy of %s") % (self.name)
+				new_name = _("Duplicate of %s") % (self.name)
 			else:
-				new_name = _("Copy of %s (%s)")% (self.name, copied_count)
+				new_name = _("Duplicate of %s (%s)")% (self.name, copied_count)
 
 			default['name'] = new_name
 			return super(Course, self).copy(default)
@@ -64,7 +64,7 @@ class Session(models.Model):
 	def _get_hours(self):
 		for r in self:
 			r.hours = r.duration * 24
-			
+
 	def _set_hours(self):
 		for r in self:
 			r.duration = r.hours / 24
@@ -113,7 +113,7 @@ class Session(models.Model):
 				}
 			}
 		self.active = True
-	
+
 	@api.constrains('instructor_id', 'attendee_ids')
 	def _check_instructor_not_in_attendees(self):
 		for record in self.filtered('instructor_id'):
