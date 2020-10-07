@@ -5,8 +5,10 @@ import time
 from psycopg2 import IntegrityError
 from datetime import timedelta
 
+
 def get_uid(self, *a):
 	return self.env.uid
+
 
 class Course(models.Model):
 	_name = 'openacademy.course'
