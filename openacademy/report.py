@@ -14,7 +14,7 @@ class ReportSession(models.AbstractModel):
         docargs = {
             "doc_ids": docids,
             "doc_model": report.model,
-            "docs": self.env['openacademy.session'].browse(docids),
-            "other_variable": 'other value',
+            "docs": self.env["openacademy.session"].browse(docids),
+            "other_variable": "other value",
         }
         return report_obj.render("openacademy.report_session", docargs)
