@@ -58,7 +58,7 @@ class OpenacademySessionTest(TransactionCase):
         self.assertEqual(session.taken_seats, 200)
 
     @mute_logger("odoo.sql_db")
-    def test_session_without_required_course(self):
+    def test_session_without_required_course_1(self):
         with self.assertRaisesRegex(
             psycopg2.IntegrityError,
             'null value in column "course_id" violates not-null constraint',
