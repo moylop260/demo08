@@ -32,7 +32,7 @@ class OpenacademySessionTest(TransactionCase):
         self.assertTrue(session)
         self.assertEqual(session.name, "Testing course", "The session name is not good")
 
-    def test_taken_seats(self):
+    def test_compute_taken_seats(self):
         session = self.env["openacademy.session"].create(
             {
                 "name": "Testing course",
@@ -45,16 +45,16 @@ class OpenacademySessionTest(TransactionCase):
                 "seats": 2,
             }
         )
-        session._taken_seats()
+        session._compute_taken_seats()
         self.assertEqual(session.taken_seats, 100)
         session.write({"seats": 4})
-        session._taken_seats()
+        session._compute_taken_seats()
         self.assertEqual(session.taken_seats, 50)
         session.write({"seats": 0})
-        session._taken_seats()
+        session._compute_taken_seats()
         self.assertEqual(session.taken_seats, 0)
         session.write({"seats": 1})
-        session._taken_seats()
+        session._compute_taken_seats()
         self.assertEqual(session.taken_seats, 200)
 
     @mute_logger("odoo.sql_db")
